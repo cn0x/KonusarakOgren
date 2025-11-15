@@ -229,7 +229,7 @@ const MainScreen = () => {
                 style={styles.avatar}
               />
             </View>
-            <Text style={styles.headerTitle}>Konuştukça Öğren</Text>
+            <Text style={styles.headerTitle}>Konuşarak Öğren</Text>
           </View>
           <TouchableOpacity
             onPress={() => navigation.navigate('History' as never)}
