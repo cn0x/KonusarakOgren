@@ -1,98 +1,249 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+Bu, [`@react-native-community/cli`](https://github.com/react-native-community/cli) kullanılarak oluşturulmuş yeni bir [**React Native**](https://reactnative.dev) projesidir.
 
-# Getting Started
+# Başlangıç
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+> **Not**: Devam etmeden önce [Ortamınızı Ayarlama](https://reactnative.dev/docs/set-up-your-environment) rehberini tamamladığınızdan emin olun.
 
-## Step 1: Start Metro
+## Adım 1: Metro'yu Başlatın
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+Öncelikle React Native için JavaScript derleme aracı olan **Metro**'yu çalıştırmanız gerekiyor.
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+Metro geliştirme sunucusunu başlatmak için, React Native projenizin kök dizininden aşağıdaki komutu çalıştırın:
 
 ```sh
-# Using npm
+# npm kullanarak
 npm start
 
-# OR using Yarn
+# VEYA Yarn kullanarak
 yarn start
 ```
 
-## Step 2: Build and run your app
+## Adım 2: Uygulamanızı derleyin ve çalıştırın
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+Metro çalışırken, React Native projenizin kök dizininden yeni bir terminal penceresi/açılımı açın ve Android veya iOS uygulamanızı derlemek ve çalıştırmak için aşağıdaki komutlardan birini kullanın:
 
 ### Android
 
 ```sh
-# Using npm
+# npm kullanarak
 npm run android
 
-# OR using Yarn
+# VEYA Yarn kullanarak
 yarn android
 ```
 
 ### iOS
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+iOS için, CocoaPods bağımlılıklarını yüklemeyi unutmayın (bu yalnızca ilk klonlamada veya native bağımlılıkları güncelledikten sonra çalıştırılması gerekir).
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+Yeni bir proje oluşturduğunuzda ilk kez, CocoaPods'u yüklemek için Ruby bundler'ı çalıştırın:
 
 ```sh
 bundle install
 ```
 
-Then, and every time you update your native dependencies, run:
+Ardından, native bağımlılıklarınızı her güncellediğinizde şunu çalıştırın:
 
 ```sh
 bundle exec pod install
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+Daha fazla bilgi için lütfen [CocoaPods Başlangıç Rehberi](https://guides.cocoapods.org/using/getting-started.html)'ne bakın.
 
 ```sh
-# Using npm
+# npm kullanarak
 npm run ios
 
-# OR using Yarn
+# VEYA Yarn kullanarak
 yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+Her şey doğru şekilde ayarlandıysa, yeni uygulamanızı Android Emülatörü, iOS Simülatörü veya bağlı cihazınızda çalışırken görmelisiniz.
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+Bu, uygulamanızı çalıştırmanın bir yoludur — ayrıca doğrudan Android Studio veya Xcode'dan da derleyebilirsiniz.
 
-## Step 3: Modify your app
+## Adım 3: Uygulamanızı değiştirin
 
-Now that you have successfully run the app, let's make changes!
+Artık uygulamayı başarıyla çalıştırdığınıza göre, değişiklikler yapalım!
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+`App.tsx` dosyasını tercih ettiğiniz metin düzenleyicide açın ve bazı değişiklikler yapın. Kaydettiğinizde, uygulamanız otomatik olarak güncellenecek ve bu değişiklikleri yansıtacaktır — bu, [Fast Refresh](https://reactnative.dev/docs/fast-refresh) tarafından desteklenmektedir.
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+Örneğin uygulamanızın durumunu sıfırlamak için zorla yeniden yüklemek istediğinizde, tam bir yeniden yükleme yapabilirsiniz:
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+- **Android**: <kbd>R</kbd> tuşuna iki kez basın veya <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) veya <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS) ile erişilen **Dev Menu**'den **"Reload"** seçeneğini seçin.
+- **iOS**: iOS Simülatöründe <kbd>R</kbd> tuşuna basın.
 
-## Congratulations! :tada:
+## Tebrikler! :tada:
 
-You've successfully run and modified your React Native App. :partying_face:
+React Native uygulamanızı başarıyla çalıştırdınız ve değiştirdiniz. :partying_face:
 
-### Now what?
+### Şimdi ne yapmalı?
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+- Bu yeni React Native kodunu mevcut bir uygulamaya eklemek istiyorsanız, [Entegrasyon rehberi](https://reactnative.dev/docs/integration-with-existing-apps)'ne bakın.
+- React Native hakkında daha fazla bilgi edinmek istiyorsanız, [dokümantasyon](https://reactnative.dev/docs/getting-started)'a bakın.
 
-# Troubleshooting
+# Sorun Giderme
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+Yukarıdaki adımları çalıştırırken sorun yaşıyorsanız, [Sorun Giderme](https://reactnative.dev/docs/troubleshooting) sayfasına bakın.
 
-# Learn More
+# Daha Fazla Bilgi
 
-To learn more about React Native, take a look at the following resources:
+React Native hakkında daha fazla bilgi edinmek için aşağıdaki kaynaklara göz atın:
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
-# KonusarakOgren
+- [React Native Web Sitesi](https://reactnative.dev) - React Native hakkında daha fazla bilgi edinin.
+- [Başlangıç](https://reactnative.dev/docs/environment-setup) - React Native'e **genel bakış** ve ortamınızı nasıl ayarlayacağınız.
+- [Temelleri Öğrenin](https://reactnative.dev/docs/getting-started) - React Native **temelleri** için **rehberli bir tur**.
+- [Blog](https://reactnative.dev/blog) - en son resmi React Native **Blog** yazılarını okuyun.
+- [`@facebook/react-native`](https://github.com/facebook/react-native) - React Native için Açık Kaynak; GitHub **deposu**.
+
+---
+
+# Konuştukça Öğren
+
+## Proje Hakkında
+
+"Konuştukça Öğren" günlük asistanı uygulaması, kullanıcıların günlüklerini paylaşmasına ve AI destekli duygu analizi almasına olanak tanıyan bir React Native uygulamasıdır.
+
+## Özellikler
+
+- 💬 **Mesajlaşma Ekranı**: Kullanıcı ve AI arasında özel mesaj baloncukları ile sohbet
+- 😊 **Duygu Analizi**: AI tarafından analiz edilen mesajlar, renk kodlu duygu göstergeleri ile
+- 📚 **Geçmiş Takibi**: Tüm mesajların kaydedildiği ve görüntülenebildiği geçmiş ekranı
+- 🗑️ **Kaydırarak Silme**: Geçmiş ekranında mesajları kaydırarak silme özelliği
+- 🎨 **Onboarding Ekranı**: İlk kullanım için hoş geldin ekranı
+- ⏰ **Gerçek Zamanlı Zaman Damgaları**: Mesaj zamanlarının dinamik olarak güncellenmesi
+
+## Teknolojiler
+
+- React Native 0.82.1
+- TypeScript
+- React Navigation
+- AsyncStorage (veri saklama)
+- Google Gemini AI API
+
+## Proje Yapısı
+
+```
+src/
+├── screens/
+│   ├── Main.tsx          # Ana mesajlaşma ekranı
+│   ├── History.tsx       # Geçmiş mesajlar ekranı
+│   └── Onboarding.tsx    # Hoş geldin ekranı
+├── types/
+│   └── message.ts        # Mesaj tip tanımları
+└── utils/
+    ├── storage.ts        # AsyncStorage yardımcı fonksiyonları
+    └── messageUtils.ts   # Mesaj yardımcı fonksiyonları
+```
+
+## Cursor AI ile Geliştirilen Özellikler
+
+Aşağıdaki özellikler ve bileşenler [Cursor AI](https://cursor.sh) yardımıyla geliştirilmiştir:
+
+### ✅ Mesajlaşma Ekranı (Main.tsx)
+
+- Özel mesaj baloncukları (üçüncü parti kütüphane kullanılmadan)
+- Header bar (avatar, isim, geçmiş butonu)
+- AI yanıtlarının JSON formatından parse edilmesi
+- Duygu analizi ve renk kodlaması
+- Gerçek zamanlı zaman damgası güncellemeleri
+- Yeni mesaj gönderildiğinde eski mesajların temizlenmesi
+
+### ✅ Geçmiş Ekranı (History.tsx)
+
+- Kaydırarak silme özelliği (PanResponder ve Animated API kullanılarak)
+- Mesaj listesi görüntüleme
+- Duygu göstergeleri ve zaman damgaları
+- AsyncStorage ile mesaj silme işlemleri
+
+### ✅ Onboarding Ekranı (Onboarding.tsx)
+
+- İlk kullanım için hoş geldin ekranı
+- Özellik tanıtımları
+- Navigasyon mantığı ve AsyncStorage entegrasyonu
+
+### ✅ Yardımcı Fonksiyonlar
+
+- `messageUtils.ts`: Duygu renk eşleştirme, zaman damgası formatlama
+- `message.ts`: TypeScript tip tanımları
+- Duygu normalleştirme fonksiyonları (pozitif/negatif/nötr)
+
+### ✅ AI Entegrasyonu
+
+- Google Gemini AI API entegrasyonu
+- AI yanıtlarının parse edilmesi (JSON ve fallback parsing)
+- Duygu, renk, özet ve öneri çıkarımı
+
+### ✅ Veri Yönetimi
+
+- AsyncStorage ile mesaj saklama
+- Onboarding durumu takibi
+- Mesaj geçmişi yönetimi
+
+## Manuel Olarak Geliştirilen Kısımlar (Cursor Yardımı Olmadan)
+
+Aşağıdaki kısımlar manuel olarak veya React Native CLI ile oluşturulmuştur:
+
+### ✅ Proje Başlangıç Kurulumu
+
+- React Native CLI ile proje oluşturma (`npx react-native init`)
+- Temel proje yapısı ve klasör organizasyonu
+- `package.json` bağımlılık yönetimi
+- TypeScript konfigürasyonu (`tsconfig.json`)
+- Metro bundler konfigürasyonu (`metro.config.js`)
+- Android ve iOS native konfigürasyon dosyaları
+
+### ✅ Temel Navigation Yapısı
+
+- React Navigation kurulumu ve temel yapılandırması
+- `App.tsx` içindeki temel Stack Navigator yapısı
+- NavigationContainer ve Stack.Navigator kurulumu
+- Ekranlar arası temel navigasyon akışı
+
+### ✅ Bağımlılık Yönetimi
+
+- `package.json` içindeki bağımlılıkların kurulumu:
+  - `@react-navigation/native` ve `@react-navigation/native-stack`
+  - `@react-native-async-storage/async-storage`
+  - `@google/genai` (Google Gemini AI)
+  - `react-native-safe-area-context`
+  - Diğer React Native bağımlılıkları
+
+### ✅ API Konfigürasyonu
+
+- Google Gemini AI API key yapılandırması (`src/utils/keys.ts`)
+- API entegrasyonu için temel yapı
+
+### ✅ İlk Ekran Yapıları
+
+- `Main.tsx` ve `History.tsx` dosyalarının ilk oluşturulması
+- Temel ekran iskeletleri ve import yapıları
+- İlk component yapıları
+
+### ✅ Stil ve UI Düzenlemeleri
+
+- Avatar görselinin değiştirilmesi (`pp.jpg` kullanımı)
+- Onboarding ekranındaki stil düzenlemeleri:
+  - Feature icon'ların kaldırılması
+  - Margin ve padding ayarlamaları
+  - Layout düzenlemeleri
+- Header bar'daki avatar container stil ayarlamaları
+
+### ✅ Git ve Proje Yönetimi
+
+- `.gitignore` dosyası yapılandırması
+- Git repository kurulumu
+- Proje dokümantasyonu
+
+### ✅ Native Platform Konfigürasyonları
+
+- Android `build.gradle` ve `AndroidManifest.xml` ayarları
+- iOS `Info.plist` ve `AppDelegate` konfigürasyonları
+- Platform-specific ayarlar
+
+## Notlar
+
+- Tüm UI bileşenleri React Native'in temel bileşenleri kullanılarak oluşturulmuştur (üçüncü parti UI kütüphanesi kullanılmamıştır)
+- Swipe-to-delete özelliği React Native'in Animated API ve PanResponder kullanılarak implemente edilmiştir
+- AI yanıtları hem JSON hem de düz metin formatlarını destekler
+- Proje, React Native 0.82.1 ve TypeScript kullanılarak geliştirilmiştir
