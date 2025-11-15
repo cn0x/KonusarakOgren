@@ -17,7 +17,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { Storage } from '../utils/storage';
 import { Message } from '../types/message';
-import renderMessageBubble from '../components/MessageBubble';
+import { getMoodColor, formatTimestamp } from '../utils/messageUtils';
 
 const ai = new GoogleGenAI({ apiKey: GOOGLE_API_KEY });
 
@@ -214,6 +214,41 @@ const MainScreen = () => {
     }
   };
 
+  const renderMessageBubble = (message: Message) => {
+    const moodColor = getMoodColor(message.mood);
+    const isUser = message.fromUser;
+    // Use 'now' state to calculate relative time, which updates in real-time
+    const relativeTime = formatTimestamp(message.timestamp, now);
+
+    return (
+      <View
+        key={message.id}
+        style={[
+          styles.messageBubble,
+          isUser ? styles.userBubble : styles.aiBubble,
+        ]}
+      >
+        <Text style={isUser ? styles.userMessageText : styles.messageText}>
+          {message.text}
+        </Text>
+        <View style={styles.messageFooter}>
+          <View
+            style={[
+              styles.moodIndicator,
+              { backgroundColor: message.color || moodColor },
+            ]}
+          />
+          <Text style={[styles.timestamp, isUser && styles.userTimestamp]}>
+            {relativeTime}
+          </Text>
+        </View>
+        {message.recommendation && !isUser && (
+          <Text style={styles.recommendation}>💡 {message.recommendation}</Text>
+        )}
+      </View>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.page}>
       <KeyboardAvoidingView
@@ -229,7 +264,7 @@ const MainScreen = () => {
                 style={styles.avatar}
               />
             </View>
-            <Text style={styles.headerTitle}>Konuşarak Öğren</Text>
+            <Text style={styles.headerTitle}>Konuşurken Öğren</Text>
           </View>
           <TouchableOpacity
             onPress={() => navigation.navigate('History' as never)}
