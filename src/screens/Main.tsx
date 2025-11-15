@@ -7,6 +7,8 @@ import {
   View,
   ScrollView,
   Alert,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import React, { useEffect, useState, useRef } from 'react';
 import { GoogleGenAI } from '@google/genai';
@@ -15,7 +17,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import { Storage } from '../utils/storage';
 import { Message } from '../types/message';
-import { getMoodColor, formatTimestamp } from '../utils/messageUtils';
+import renderMessageBubble from '../components/MessageBubble';
 
 const ai = new GoogleGenAI({ apiKey: GOOGLE_API_KEY });
 
@@ -212,100 +214,70 @@ const MainScreen = () => {
     }
   };
 
-  const renderMessageBubble = (message: Message) => {
-    const moodColor = getMoodColor(message.mood);
-    const isUser = message.fromUser;
-    // Use 'now' state to calculate relative time, which updates in real-time
-    const relativeTime = formatTimestamp(message.timestamp, now);
-
-    return (
-      <View
-        key={message.id}
-        style={[
-          styles.messageBubble,
-          isUser ? styles.userBubble : styles.aiBubble,
-        ]}
-      >
-        <Text style={isUser ? styles.userMessageText : styles.messageText}>
-          {message.text}
-        </Text>
-        <View style={styles.messageFooter}>
-          <View
-            style={[
-              styles.moodIndicator,
-              { backgroundColor: message.color || moodColor },
-            ]}
-          />
-          <Text style={[styles.timestamp, isUser && styles.userTimestamp]}>
-            {relativeTime}
-          </Text>
-        </View>
-        {message.recommendation && !isUser && (
-          <Text style={styles.recommendation}>💡 {message.recommendation}</Text>
-        )}
-      </View>
-    );
-  };
-
   return (
     <SafeAreaView style={styles.page}>
-      {/* Header */}
-      <View style={styles.header}>
-        <View style={styles.headerLeft}>
-          <View style={styles.avatarContainer}>
-            <Image
-              source={require('../utils/assets/pp.jpg')}
-              style={styles.avatar}
-            />
-          </View>
-          <Text style={styles.headerTitle}>Konuştukça Öğren</Text>
-        </View>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('History' as never)}
-          style={styles.historyButton}
-        >
-          <Image
-            source={require('../utils/assets/history.png')}
-            style={styles.historyIcon}
-          />
-        </TouchableOpacity>
-      </View>
-
-      {/* Messages Container */}
-      <ScrollView
-        ref={scrollViewRef}
-        style={styles.messagesContainer}
-        contentContainerStyle={styles.messagesContent}
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
-        {messages.map(renderMessageBubble)}
-      </ScrollView>
+        {/* Header */}
+        <View style={styles.header}>
+          <View style={styles.headerLeft}>
+            <View style={styles.avatarContainer}>
+              <Image
+                source={require('../utils/assets/pp.jpg')}
+                style={styles.avatar}
+              />
+            </View>
+            <Text style={styles.headerTitle}>Konuştukça Öğren</Text>
+          </View>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('History' as never)}
+            style={styles.historyButton}
+          >
+            <Image
+              source={require('../utils/assets/history.png')}
+              style={styles.historyIcon}
+            />
+          </TouchableOpacity>
+        </View>
 
-      {/* Input Container */}
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          onChangeText={setText}
-          value={text}
-          placeholder="Mesajınızı yazın..."
-          placeholderTextColor="#999"
-          multiline
-        />
-        <TouchableOpacity
-          disabled={text.length === 0}
-          style={[
-            styles.sendButton,
-            text.length > 0
-              ? styles.sendButtonActive
-              : styles.sendButtonDisabled,
-          ]}
-          onPress={aiCall}
+        {/* Messages Container */}
+        <ScrollView
+          ref={scrollViewRef}
+          style={styles.messagesContainer}
+          contentContainerStyle={styles.messagesContent}
         >
-          <Image
-            source={require('../utils/assets/paper-plane.png')}
-            style={styles.sendIcon}
+          {messages.map(renderMessageBubble)}
+        </ScrollView>
+
+        {/* Input Container */}
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            onChangeText={setText}
+            value={text}
+            placeholder="Mesajınızı yazın..."
+            placeholderTextColor="#999"
+            multiline
           />
-        </TouchableOpacity>
-      </View>
+          <TouchableOpacity
+            disabled={text.length === 0}
+            style={[
+              styles.sendButton,
+              text.length > 0
+                ? styles.sendButtonActive
+                : styles.sendButtonDisabled,
+            ]}
+            onPress={aiCall}
+          >
+            <Image
+              source={require('../utils/assets/paper-plane.png')}
+              style={styles.sendIcon}
+            />
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };

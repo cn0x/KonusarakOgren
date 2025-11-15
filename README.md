@@ -133,8 +133,65 @@ src/
 │   └── message.ts        # Mesaj tip tanımları
 └── utils/
     ├── storage.ts        # AsyncStorage yardımcı fonksiyonları
-    └── messageUtils.ts   # Mesaj yardımcı fonksiyonları
+    ├── messageUtils.ts   # Mesaj yardımcı fonksiyonları
+    └── keys.ts           # API anahtarları (Google Gemini)
+├── navigation/
+│   └── RootStack.tsx     # Ana navigasyon yapısı
 ```
+
+## Kurulum
+
+### Google Gemini API Anahtarı Yapılandırması
+
+Uygulamanın AI özelliklerini kullanabilmek için Google Gemini API anahtarınızı yapılandırmanız gerekmektedir.
+
+#### 1. Google Gemini API Anahtarı Alma
+
+1. [Google AI Studio](https://makersuite.google.com/app/apikey) veya [Google Cloud Console](https://console.cloud.google.com/) üzerinden bir API anahtarı oluşturun
+2. Gemini API'yi etkinleştirdiğinizden emin olun
+3. API anahtarınızı kopyalayın
+
+#### 2. API Anahtarını Projeye Ekleme
+
+1. Proje kök dizininde `src/utils/keys.ts` dosyasını açın
+2. `GOOGLE_API_KEY` değişkenine API anahtarınızı ekleyin:
+
+```typescript
+// src/utils/keys.ts
+export const GOOGLE_API_KEY = 'BURAYA_API_ANAHTARINIZI_YAPIŞTIRIN';
+```
+
+**Önemli Güvenlik Notları:**
+
+- ⚠️ `keys.ts` dosyasını asla Git'e commit etmeyin (zaten `.gitignore` içinde olmalı)
+- ⚠️ API anahtarınızı herkese açık repository'lere yüklemeyin
+- ⚠️ Üretim ortamında API anahtarını environment variables veya güvenli bir key management servisi kullanarak saklayın
+
+#### 3. Dosyanın Git'ten Hariç Tutulduğunu Doğrulama
+
+`.gitignore` dosyasında `src/utils/keys.ts` veya `**/keys.ts` satırının olduğundan emin olun. Eğer yoksa ekleyin:
+
+```
+# API Keys
+src/utils/keys.ts
+**/keys.ts
+```
+
+#### 4. Test Etme
+
+API anahtarını ekledikten sonra uygulamayı çalıştırın ve bir mesaj göndererek AI yanıtının geldiğini doğrulayın:
+
+```bash
+npm start
+# Başka bir terminalde
+npm run android  # veya npm run ios
+```
+
+**Sorun Giderme:**
+
+- API anahtarı geçersizse, konsolda hata mesajı görünecektir
+- API kotası aşıldıysa, Google Cloud Console'dan kotanızı kontrol edin
+- API'nin etkinleştirildiğinden emin olun
 
 ## Cursor AI ile Geliştirilen Özellikler
 

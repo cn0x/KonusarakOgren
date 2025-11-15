@@ -4,20 +4,15 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  Image,
-  Animated,
-  PanResponder,
   Dimensions,
 } from 'react-native';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Storage } from '../utils/storage';
 import { Message } from '../types/message';
-import { getMoodColor, formatTime, formatDate } from '../utils/messageUtils';
+import SwipeableHistoryItem from '../components/Swipeable';
 
-const { width: SCREEN_WIDTH } = Dimensions.get('window');
-const SWIPE_THRESHOLD = -100; // Swipe left threshold to trigger delete
 const DELETE_BUTTON_WIDTH = 80;
 
 const HistoryScreen = () => {
@@ -71,133 +66,6 @@ const HistoryScreen = () => {
       console.error('Error deleting message:', error);
     }
   };
-
-  const SwipeableHistoryItem = ({ message }: { message: Message }) => {
-    const translateX = useRef(new Animated.Value(0)).current;
-    const isOpen = useRef(false);
-
-    const panResponder = useRef(
-      PanResponder.create({
-        onStartShouldSetPanResponder: () => false,
-        onMoveShouldSetPanResponder: (_, gestureState) => {
-          // Only activate if horizontal swipe is more significant than vertical
-          return (
-            Math.abs(gestureState.dx) > Math.abs(gestureState.dy) &&
-            Math.abs(gestureState.dx) > 10
-          );
-        },
-        onPanResponderGrant: () => {
-          // Close any other open items when starting a new swipe
-          translateX.setOffset((translateX as any)._value);
-          translateX.setValue(0);
-        },
-        onPanResponderMove: (_, gestureState) => {
-          // Only allow swiping left (negative dx)
-          if (gestureState.dx < 0) {
-            translateX.setValue(gestureState.dx);
-          } else if (gestureState.dx > 0 && isOpen.current) {
-            // Allow swiping right to close if already open
-            translateX.setValue(gestureState.dx - DELETE_BUTTON_WIDTH);
-          }
-        },
-        onPanResponderRelease: (_, gestureState) => {
-          translateX.flattenOffset();
-          const currentValue = (translateX as any)._value;
-
-          if (currentValue < SWIPE_THRESHOLD) {
-            // Swipe threshold reached, animate to show delete button
-            isOpen.current = true;
-            Animated.spring(translateX, {
-              toValue: -DELETE_BUTTON_WIDTH,
-              useNativeDriver: true,
-              tension: 50,
-              friction: 7,
-            }).start();
-          } else {
-            // Not enough swipe, animate back to original position
-            isOpen.current = false;
-            Animated.spring(translateX, {
-              toValue: 0,
-              useNativeDriver: true,
-              tension: 50,
-              friction: 7,
-            }).start();
-          }
-        },
-      }),
-    ).current;
-
-    const handleDelete = () => {
-      Animated.timing(translateX, {
-        toValue: -SCREEN_WIDTH,
-        duration: 300,
-        useNativeDriver: true,
-      }).start(() => {
-        deleteMessage(message.id);
-      });
-    };
-
-    const handleClose = () => {
-      isOpen.current = false;
-      Animated.spring(translateX, {
-        toValue: 0,
-        useNativeDriver: true,
-        tension: 50,
-        friction: 7,
-      }).start();
-    };
-
-    const moodColor = getMoodColor(message.mood);
-
-    return (
-      <View style={styles.swipeableContainer}>
-        {/* Delete Button Background */}
-        <View style={styles.deleteButtonContainer}>
-          <TouchableOpacity
-            style={styles.deleteButton}
-            onPress={handleDelete}
-            activeOpacity={0.8}
-          >
-            <Text style={styles.deleteButtonText}>Sil</Text>
-          </TouchableOpacity>
-        </View>
-
-        {/* Swipeable Content */}
-        <Animated.View
-          style={[
-            styles.historyItem,
-            {
-              transform: [{ translateX }],
-            },
-          ]}
-          {...panResponder.panHandlers}
-        >
-          <View style={styles.historyItemHeader}>
-            <View
-              style={[
-                styles.moodIndicator,
-                { backgroundColor: message.color || moodColor },
-              ]}
-            />
-            <Text style={styles.moodText}>
-              {message.mood === 'pozitif' || message.mood === 'happy'
-                ? 'Mutlu'
-                : message.mood === 'negatif' || message.mood === 'sad'
-                ? 'Üzgün'
-                : 'Nötr'}
-            </Text>
-          </View>
-          <Text style={styles.historyText}>{message.text}</Text>
-          <View style={styles.historyFooter}>
-            <Text style={styles.historyTime}>
-              {formatTime(message.timestamp)} - {formatDate(message.timestamp)}
-            </Text>
-          </View>
-        </Animated.View>
-      </View>
-    );
-  };
-
   return (
     <SafeAreaView style={styles.page}>
       {/* Header */}
@@ -235,7 +103,11 @@ const HistoryScreen = () => {
           </View>
         ) : (
           messages.map(message => (
-            <SwipeableHistoryItem key={message.id} message={message} />
+            <SwipeableHistoryItem
+              deleteMessage={deleteMessage}
+              key={message.id}
+              message={message}
+            />
           ))
         )}
       </ScrollView>
